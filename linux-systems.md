@@ -2,7 +2,8 @@
 
 This lab will introduce you to the basics of the Linux systems we will be using this semester. 
 Every student is required to use the departments linux lab machines for **all projects** for this class. 
-This can be done either by physically being in the labs and logging onto the machines, or by using another computer to remotely log into the machines.  Tasks that need to be performed to complete the lab are indicated as follows: 
+This can be done either by physically being in the labs and logging onto the machines, or by using another computer to remotely log into the machines.  Since knowledge of how to remotely access machines is critical for this class and for CS more broadly, this lab will teach you how to remotely access the CS lab machines.  For future CS projects you are welcome to use the labs in person. 
+Tasks that need to be performed to complete this lab are indicated as follows: 
 
 ---
 
@@ -56,8 +57,7 @@ Once you have located and run the terminal application you will use it to run th
 
 ## Part 2. Remotely log onto the department lab machines.  
 
-(If you are physically at a lab machine, then you can skip this part.)
-
+We will now cover the process that allows us to remotely log into the CS department lab machines. 
 
 ### Step 1. Secure Shell (SSH)
 To remotely log into the department machines, we will use a program called `ssh`.  This stands for *Secure Shell* or *Secure Socket Shell*.  This program allows us to be on the terminal of another computer from a terminal on another computer. 
