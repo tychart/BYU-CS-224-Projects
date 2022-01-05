@@ -66,6 +66,15 @@ The TA's build the solution and test it against a set of input files by comparin
   * Exact match with `xxd -b` on all input files (10 points)
   * Style (20 points)
 
+# Length Guidelines
+
+To give you a rough idea of how much code you will need to write for each of the functions, we provide the following guidelines.  These are provided only to help you tell when you are going down the wrong path so you can stop and start over.  If you feel that you need more lines than these ranges to complete a portion of the project, this is a sign that you might be misunderstanding a portion of the project assignment or the principles we have covered in class that you should be using in your solution.  If this is the case for you, please stop and reach out to a TA for guidance to help you get back on the right track. 
+
+  * `void printDataAsHex(unsigned char* data, size_t size)` : roughly 10-15 lines of code
+  * `void printDataAsChars(unsigned char* data, size_t size)`: roughly 7-12 lines of code
+  * `void readAndPrintInputAsBits(FILE* input)`: roughly 35-50 lines of code (you might want to add additional function(s), which are included in this rough estimate)
+
+
 # Getting the Starter Code
 
 Copying [myxxd.c](myxxd.c) in the browser or downloading the code in the browser is one way to get the code, but if the work is being done remotely with `ssh`, then the file is on the wrong machine. The `scp` tool can copy the file to the remote machine, but there is an easier solutions using `git`.
