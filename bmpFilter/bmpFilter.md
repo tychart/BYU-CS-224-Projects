@@ -101,6 +101,8 @@ Upload the final [bmpFilter.c](bmpFilter.c) file to [Canvas](http://canvas.byu.e
 
 # Getting the Starter Code
 
+You should have already cloned the projects repo to you cs-lab account as part of Lab 1, but if for any reason you need to reclone it, you can use the directions below.
+
 The projectss are in a `git` repository named [byu-cs-224-projects](https://bitbucket.org/byucs224/byu-cs-224-projects/src/master/). There is a button on the page named **Clone**, click that button, copy the command, and past it into the terminal. It will download the files directly to the remote machine. Here is the command to save time with following the link:
 
 ```
@@ -230,6 +232,8 @@ Each pixel in the image is converted to a *gray* pixel by setting all three colo
 # Extra Credit 50% Scale Down
 
 This filter will scale an image down to half its dimensions in both `width` and `height`. In other words, if the original image is `100` pixels wide and `50` pixels tall, then the resulting image should be `50` pixels wide and `25` pixels tall. In general, this will mean that four pixels in a square pattern from the original image become a single pixel in the filtered image. Determine the RGB values of this *composite* pixel by averaging the values of the four original pixels together on a per-color basis (i.e. compute the average of the red values, the average of the green values, and the average of the blue values and use these as the RGB values for the new pixel). Start in the bottom left corner of an image and work row by row, left to right and bottom to top to perform the scaling. Depending on the dimensions of the original image you may not have four pixels to work with when you reach the right and top edges of the image. In such cases simply compute the averages based on the pixels that are available (i.e. on the right edge you may only have two pixels stacked vertically to work with and on the top edge of the image you may only have two pixels sitting horizontally side-by-side to work with. It is also possible to end up with a single pixel left in the upper-right corner of the image after processing all the other pixels. In such a case this pixel would simply end up copied unchanged to the new image.
+
+**Note: The autograder assumes the `-s` switch is used to run the scale down filter**  ex. `./bmpfilter -s < ./image.bmp`
 
 # Pre-processor for debugging
 

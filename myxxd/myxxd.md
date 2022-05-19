@@ -77,9 +77,9 @@ To give you a rough idea of how much code you will need to write for each of the
 
 # Getting the Starter Code
 
-Copying [myxxd.c](myxxd.c) in the browser or downloading the code in the browser is one way to get the code, but if the work is being done remotely with `ssh`, then the file is on the wrong machine. The `scp` tool can copy the file to the remote machine, but there is an easier solutions using `git`.
+You should have already cloned the projects repo to you cs-lab account as part of Lab 1, but if for any reason you need to reclone it, you can use the directions below.
 
-The projects are in a `git` repository named [byu-cs-224-projects](https://bitbucket.org/byucs224/byu-cs-224-projects/src/master/). There is a button on the page named **Clone**, click that button, copy the command, and past it into the terminal. It will download the files directly to the remote machine. Here is the command to save time with following the link:
+The projects are in a `git` repository named [byu-cs-224-projects](https://bitbucket.org/byucs224/byu-cs-224-projects/src/master/). There is a button on the top of the page named **Clone**, click that button, copy the command, and past it into the terminal. It will download the files directly to the remote machine. Here is the command to save time with following the link:
 
 ```
 git clone https://bitbucket.org/byucs224/byu-cs-224-projects/src/master/
