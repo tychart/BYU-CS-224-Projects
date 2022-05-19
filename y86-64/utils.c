@@ -88,7 +88,7 @@ void initializeMemory(wordType memorySize) {
   memorySizeInBytes = memorySize;
   memory = (byteType*)calloc(memorySize, sizeof(byteType));
   if (memory == NULL) {
-    printf("ERROR: failed to initialize memory\n");
+    fprintf(stderr, "ERROR: failed to initialize memory\n");
     exit(CALLOC_ERROR);
   }
 }
@@ -99,7 +99,7 @@ wordType getMemorySizeInBytes() {
 
 void isGoodAddress(int address) {
   if (address < 0 || address >= memorySizeInBytes) {
-    printf("ERROR: bad address 0x%0x\n", address);
+    fprintf(stderr, "ERROR: bad address 0x%0x\n", address);
     exit(BAD_ADDRESS);
   } 
 }
@@ -151,14 +151,14 @@ void printMemory() {
 void initializeRegisters() {
   registers = (wordType *)calloc(REGISTER_COUNT, sizeof(wordType));
   if (registers == NULL) {
-    printf("ERROR: failed to initialize registers\n");
+    fprintf(stderr, "ERROR: failed to initialize registers\n");
     exit(CALLOC_ERROR);
   }
 }
 
 void isGoodRegisterIndex(int registerIndex) {
   if (registerIndex < 0 || registerIndex >= REGISTER_COUNT) {
-    printf("ERROR: bad register 0x%0x\n", registerIndex);
+    fprintf(stderr, "ERROR: bad register 0x%0x\n", registerIndex);
     exit(BAD_REGISTER);
   } 
 }
@@ -226,7 +226,7 @@ bool Cond(int ifun) {
   } else if (ifun == G) {
     return isG();
   } else {
-    printf("ERROR: unknown ifun (0x%01x) in doOPQ\n", ifun);
+    fprintf(stderr, "ERROR: unknown ifun (0x%01x) in doOPQ\n", ifun);
     exit(BAD_IFUN);
   }
 }
@@ -303,7 +303,7 @@ FILE *parseCommandLine(int argc, char **argv, int *stepMode) {
 
   inputFile = fopen(argv[1], "r");
   if (inputFile == NULL) {
-    printf("ERROR: unable to open %s for reading\n", argv[1]);
+    fprintf(stderr, "ERROR: unable to open %s for reading\n", argv[1]);
     exit(BAD_FILENAME);
   }
 
