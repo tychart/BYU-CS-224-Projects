@@ -6,10 +6,11 @@
 #define FALSE 0
 
 #define BAD_NUMBER_ARGS 1
-#define FSEEK_ERROR 2
-#define FREAD_ERROR 3
-#define MALLOC_ERROR 4
-#define FWRITE_ERROR 5
+#define BAD_OPTION 2
+#define FSEEK_ERROR 3
+#define FREAD_ERROR 4
+#define MALLOC_ERROR 5
+#define FWRITE_ERROR 6
 
 /**
  * Parses the command line.
@@ -24,14 +25,16 @@
  **/
 FILE *parseCommandLine(int argc, char **argv, int *isGrayscale) {
   if (argc > 2) {
-    printf("Usage: %s [-g]\n", argv[0]);
+    fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
     exit(BAD_NUMBER_ARGS);
   }
-  
-  if (argc == 2 && strcmp(argv[1], "-g") == 0) {
-    *isGrayscale = TRUE;
+
+  if (argc == 2 && strcmp(argv[1], "-g") != 0) {
+    fprintf(stderr, "Unknown option: '%s'\n", argv[1]);
+    fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
+    exit(BAD_OPTION);
   } else {
-    *isGrayscale = FALSE;
+    *isGrayscale = TRUE;
   }
 
   return stdin;
