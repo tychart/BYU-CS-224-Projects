@@ -29,13 +29,17 @@ FILE *parseCommandLine(int argc, char **argv, int *isGrayscale) {
     exit(BAD_NUMBER_ARGS);
   }
 
-  if (argc == 2 && strcmp(argv[1], "-g") != 0) {
-    fprintf(stderr, "Unknown option: '%s'\n", argv[1]);
-    fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
-    exit(BAD_OPTION);
-  } else {
-    *isGrayscale = TRUE;
+  if (argc == 2) {
+    if (strcmp(argv[1], "-g") != 0) {
+      fprintf(stderr, "Unknown option: '%s'\n", argv[1]);
+      fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
+      exit(BAD_OPTION);
+    } else {
+      *isGrayscale = TRUE;
+    }
   }
+
+  printf("%d\n", *isGrayscale);
 
   return stdin;
 }
