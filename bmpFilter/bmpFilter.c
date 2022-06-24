@@ -37,6 +37,11 @@ FILE *parseCommandLine(int argc, char **argv, int *isGrayscale) {
     } else {
       *isGrayscale = TRUE;
     }
+<<<<<<< HEAD
+=======
+  } else {
+    *isGrayscale = FALSE;
+>>>>>>> 73b601f65acfc2cc0f91237bd0c9bc36f1078a8a
   }
 
   printf("%d\n", *isGrayscale);
