@@ -34,9 +34,9 @@ FILE *parseCommandLine(int argc, char **argv, int *isGrayscale) {
       fprintf(stderr, "Unknown option: '%s'\n", argv[1]);
       fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
       exit(BAD_OPTION);
-	} else {
+    } else {
       *isGrayscale = TRUE;
-	}
+    }
   } else {
     *isGrayscale = FALSE;
   }
