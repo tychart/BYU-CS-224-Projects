@@ -30,12 +30,16 @@ FILE *parseCommandLine(int argc, char **argv, int *isGrayscale) {
   }
 
   if (argc == 2) {
-    if (strcmp(argv[1], "-g") != 0) {
+    if (strcmp(argv[1], "-g") == 0) {
+      *isGrayscale = TRUE;
+
+    } else if (strcmp(argv[1], "-s") == 0) {
+      // set isscale here
+
+    } else {
       fprintf(stderr, "Unknown option: '%s'\n", argv[1]);
       fprintf(stderr, "Usage: %s [-g]\n", argv[0]);
-      exit(BAD_OPTION);
-    } else {
-      *isGrayscale = TRUE;
+      exit(BAD_OPTION);  
     }
   }
 
