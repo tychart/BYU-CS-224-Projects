@@ -24,8 +24,8 @@ The `-DDEBUG` option defines the `DEBUG` symbol for the pre-processor. The prepr
 
 In this project standard input and standard output are used to pass images to the program and save the filtered image.  Two usage examples: 
 ```
-$ ./a.out < ./images/orig-cheese.bmp > threshold-cheese.bmp
-$ ./a.out -g < ./images/orig-cheese.bmp > grayscale-cheese.bmp
+$ ./a.out < ./images/orig-cheese.bmp > my-threshold-cheese.bmp
+$ ./a.out -g < ./images/orig-cheese.bmp > my-grayscale-cheese.bmp
 ```
 
 The `<` character redirects the file `./images/orig-cheese.bmp` to standard input for `a.out` to read. The `>` characters redirects the standout output from `a.out` to the file `threshold-cheese.bmp`. The second example shows how to enable the grayscale filter with the `-g` flag.
@@ -35,7 +35,7 @@ The `<` character redirects the file `./images/orig-cheese.bmp` to standard inpu
 Two test the output of your filter, save the resulting image, and then check to see if it differs at all from the provided output files. This is done using the `diff` command. `diff` takes in two arguments, which it then compares.  
 
 ```
-$ diff /images/threshold-cheese.bmp my-threshold-cheese.bmp
+$ diff ./images/threshold-cheese.bmp my-threshold-cheese.bmp
 ```
 
 If there are any differences then the result of the `diff` command will tell you. 
