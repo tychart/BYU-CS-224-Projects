@@ -6,81 +6,48 @@
 #include "utils.h"
 
 /** BEGIN Machine State Definition **/
-byteType *memory = NULL;
-int memorySizeInBytes = 0;
+static byteType *memory = NULL;
+static int memorySizeInBytes = 0;
 
-const int REGISTER_COUNT = 15;
-wordType *registers = NULL;
+#define REGISTER_COUNT 15
+static wordType registers[REGISTER_COUNT];
 
-bool signFlag = FALSE;
-bool zeroFlag = FALSE;
-bool overflowFlag = FALSE;
+static bool signFlag = FALSE;
+static bool zeroFlag = FALSE;
+static bool overflowFlag = FALSE;
 
-status stat = STAT_AOK;
+static status stat = STAT_AOK;
 
-wordType pc = 0x0;
-int cycleCounter = 0;
+static wordType pc = 0x0;
+static int cycleCounter = 0;
 /** END Machine State Definition **/
 
-/** BEGIN Instruction IDs **/
-const int HALT = 0x0;
-const int NOP = 0x1;
-const int RRMOVQ = 0x2;
-const int CMOVXX = 0x2;
-const int IRMOVQ = 0x3;
-const int RMMOVQ = 0x4;
-const int MRMOVQ = 0x5; 
-const int OPQ = 0x6;
-const int JXX = 0x7;
-const int CALL = 0x8;
-const int RET = 0x9;
-const int PUSHQ = 0xa;
-const int POPQ = 0xb;
-/** END Instruction IDs **/
+static wordType getMemorySizeInBytes();
+static void isGoodAddress(int address);
+static void printMemory();
 
-/** BEGIN Function IDs **/
-const int ADD = 0x0;
-const int SUB = 0x1;
-const int AND = 0x2;
-const int XOR = 0x3;
+static void printRegisters();
+static void printFlags();
+static void printStatus();
+static void printPC();
 
-const int UCND = 0x0;
-const int LE = 0x1;
-const int L = 0x2;
-const int E = 0x3;
-const int NE = 0x4; 
-const int GE = 0x5;
-const int G = 0x6;
-/** END Function IDs **/
+bool intToBool(int i) {
+  return i != 0;
+}
 
-/** BEGIN Register IDs **/
-const int RSP = 0x4;
-/** END Register IDs **/
-
-/** BEGIN STEP MODE **/
-const int NO_STEP = 0;
-const int MACHINE_STEP = 1;
-const int STAGE_STEP = 2;
-/** END STEP MODE **/
-
-wordType getMemorySizeInBytes();
-void isGoodAddress(int address);
-void printMemory();
-
-void printRegisters();
-void printFlags();
-void printStatus();
-void printPC();
+bool wordToBool(wordType i) {
+  return i != 0;
+}
 
 /** BEGIN <file>.yo input to memory **/
 #define MAX_LINE_LENGTH 1024
 #define SEPARATORS " :x"
 #define BAD_NUMBER_ARGS 1
-int hexCharacter2HexDigit(char c);
-int getAddress(char* addressAsString);
-unsigned char getByte(char *nibbles);
-void getAndSetBytesInMemory(int address, char *nibbles);
-void parseLine(char *line);
+static int hexCharacter2HexDigit(char c);
+static int getAddress(char* addressAsString);
+static unsigned char getByte(char *nibbles);
+static void getAndSetBytesInMemory(int address, char *nibbles);
+static void parseLine(char *line);
 /** END <file.>yo input to memory **/
 
 /** BEGIN Machine State Definition **/
@@ -93,11 +60,11 @@ void initializeMemory(wordType memorySize) {
   }
 }
 
-wordType getMemorySizeInBytes() {
+static wordType getMemorySizeInBytes() {
   return memorySizeInBytes;
 }
 
-void isGoodAddress(int address) {
+static void isGoodAddress(int address) {
   if (address < 0 || address >= memorySizeInBytes) {
     fprintf(stderr, "ERROR: bad address 0x%0x\n", address);
     exit(BAD_ADDRESS);
@@ -124,7 +91,7 @@ void setWordInMemory(wordType address, wordType value) {
   *((wordType *)(memory + address)) = value;
 }
 
-void printBytesInMemoryOrder(wordType value) {
+static void printBytesInMemoryOrder(wordType value) {
   byteType *ptr = (byteType *)&value;
   byteType *end = ptr + sizeof(wordType);
   while(ptr < end) {
@@ -132,7 +99,7 @@ void printBytesInMemoryOrder(wordType value) {
   }
 }
 
-void printMemory() {
+static void printMemory() {
   wordType memorySizeInBytes = getMemorySizeInBytes();
   wordType wordSizeInBytes = sizeof(wordType);
   wordType value = 0;
@@ -149,14 +116,10 @@ void printMemory() {
 }
 
 void initializeRegisters() {
-  registers = (wordType *)calloc(REGISTER_COUNT, sizeof(wordType));
-  if (registers == NULL) {
-    fprintf(stderr, "ERROR: failed to initialize registers\n");
-    exit(CALLOC_ERROR);
-  }
+  memset(registers, REGISTER_COUNT, sizeof(wordType));
 }
 
-void isGoodRegisterIndex(int registerIndex) {
+static void isGoodRegisterIndex(int registerIndex) {
   if (registerIndex < 0 || registerIndex >= REGISTER_COUNT) {
     fprintf(stderr, "ERROR: bad register 0x%0x\n", registerIndex);
     exit(BAD_REGISTER);
@@ -173,9 +136,9 @@ void setRegister(int registerIndex, wordType value) {
   registers[registerIndex] = value;
 }
 
-const char* const registerNames[] = {"%rax", "%rcx", "%rdx", "%rbx", "%rsp", "%rbp", "%rsi", "%rdi", "%r08", "%r09", "%r10", "%r11", "%r12", "%r13", "%r14"};
+static const char* const registerNames[] = {"%rax", "%rcx", "%rdx", "%rbx", "%rsp", "%rbp", "%rsi", "%rdi", "%r08", "%r09", "%r10", "%r11", "%r12", "%r13", "%r14"}; 
 
-void printRegisters() {
+static void printRegisters() {
   wordType value = 0;
   for (int i = 0 ; i < REGISTER_COUNT ; ++i) {
     isGoodRegisterIndex(i);
@@ -186,32 +149,32 @@ void printRegisters() {
   }
 }
 
-bool isE() {
+static bool isE() {
   return zeroFlag;
 }
 
-bool isNE() {
+static bool isNE() {
   return !isE();
 }
 
-bool isLE() {
+static bool isLE() {
   return signFlag ^ overflowFlag || zeroFlag;
 }
 
-bool isL() {
+static bool isL() {
   return signFlag ^ overflowFlag;
 }
 
-bool isGE() {
+static bool isGE() {
   return !(signFlag ^ overflowFlag);
 }
 
-bool isG() {
+static bool isG() {
   return !(signFlag ^ overflowFlag) && !zeroFlag;
 }
 
 bool Cond(int ifun) {
-  if( ifun == UCND ){
+  if (ifun == UCND) {
     return TRUE;
   } else if (ifun == LE) {
     return isLE();
@@ -237,7 +200,7 @@ void setFlags(bool sf, bool zf, bool of) {
   overflowFlag = of;
 }
 
-void printFlags() {
+static void printFlags() {
   printf("SF: %d \tZF: %d\t OF: %d\n", signFlag, zeroFlag, overflowFlag);
 }
 
@@ -249,7 +212,7 @@ status getStatus() {
   return stat;
 }
 
-void printStatus() {
+static void printStatus() {
   printf("STAT: ");
   if (stat == STAT_AOK) {
     printf("AOK\n");
@@ -267,7 +230,7 @@ wordType getPC() {
   return pc;
 }
 
-void printPC() {
+static void printPC() {
   printf("PC: 0x%04x\n", (int)pc);
 }
 
