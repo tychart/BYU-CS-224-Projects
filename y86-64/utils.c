@@ -116,7 +116,7 @@ static void printMemory() {
 }
 
 void initializeRegisters() {
-  memset(registers, REGISTER_COUNT, sizeof(wordType));
+  memset(registers, 0, sizeof(wordType) * REGISTER_COUNT);
 }
 
 static void isGoodRegisterIndex(int registerIndex) {
