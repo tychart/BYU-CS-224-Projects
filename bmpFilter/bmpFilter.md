@@ -93,7 +93,7 @@ Upload the final [bmpFilter.c](bmpFilter.c) file to [Canvas](http://canvas.byu.e
   * `void applyThresholdToPixel(unsigned char* pixel)` (20 points)
   * `void applyGrayscaleToPixel(unsigned char* pixel)` (20 points)
   * `unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)` (10 points)
-  * Style (20 points)
+  * Style (20 points, see [here](#Good Programming Style)
   * Other
     * +2 for early submission
     * +10 for 50% scale down filter
@@ -237,7 +237,7 @@ This filter will scale an image down to half its dimensions in both `width` and 
 
 # Pre-processor for debugging
 
-The [starter file][bmpFilter.c] includes the following code in the `void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale)`
+The [starter file](bmpFilter.c) includes the following code in the `void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale)`
 
 ```
 #ifdef DEBUG
