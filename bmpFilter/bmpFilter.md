@@ -93,7 +93,7 @@ Upload the final [bmpFilter.c](bmpFilter.c) file to [Canvas](http://canvas.byu.e
   * `void applyThresholdToPixel(unsigned char* pixel)` (20 points)
   * `void applyGrayscaleToPixel(unsigned char* pixel)` (20 points)
   * `unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)` (10 points)
-  * Style (20 points, see [here](#Good Programming Style)
+  * Style (20 points, see [here](#good-programming-style))
   * Other
     * +2 for early submission
     * +10 for 50% scale down filter

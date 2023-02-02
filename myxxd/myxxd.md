@@ -64,7 +64,7 @@ The TA's build the solution and test it against a set of input files by comparin
   * Exact match with `xxd` default behavior on all input files (10 points)
   * `void readAndPrintInputAsBits(FILE* input)` (80 points)
   * Exact match with `xxd -b` on all input files (10 points)
-  * Style (20 points, see [here](#Good Programming Style)
+  * Style (20 points, see [here](#good-programming-style))
 
 # Length Guidelines
 
