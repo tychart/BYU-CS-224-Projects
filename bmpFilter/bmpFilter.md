@@ -24,8 +24,8 @@ The `-DDEBUG` option defines the `DEBUG` symbol for the pre-processor. The prepr
 
 In this project standard input and standard output are used to pass images to the program and save the filtered image.  Two usage examples: 
 ```
-$ ./a.out < ./images/orig-cheese.bmp > my-threshold-cheese.bmp
-$ ./a.out -g < ./images/orig-cheese.bmp > my-grayscale-cheese.bmp
+$ ./a.out < images/orig-cheese.bmp > my-threshold-cheese.bmp
+$ ./a.out -g < images/orig-cheese.bmp > my-grayscale-cheese.bmp
 ```
 
 The `<` character redirects the file `./images/orig-cheese.bmp` to standard input for `a.out` to read. The `>` characters redirects the standout output from `a.out` to the file `threshold-cheese.bmp`. The second example shows how to enable the grayscale filter with the `-g` flag.
@@ -35,7 +35,7 @@ The `<` character redirects the file `./images/orig-cheese.bmp` to standard inpu
 Two test the output of your filter, save the resulting image, and then check to see if it differs at all from the provided output files. This is done using the `diff` command. `diff` takes in two arguments, which it then compares.  
 
 ```
-$ diff ./images/threshold-cheese.bmp my-threshold-cheese.bmp
+$ diff images/threshold-cheese.bmp my-threshold-cheese.bmp
 ```
 
 If there are any differences then the result of the `diff` command will tell you. 
@@ -93,7 +93,7 @@ Upload the final [bmpFilter.c](bmpFilter.c) file to [Canvas](http://canvas.byu.e
   * `void applyThresholdToPixel(unsigned char* pixel)` (20 points)
   * `void applyGrayscaleToPixel(unsigned char* pixel)` (20 points)
   * `unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)` (10 points)
-  * Style (20 points)
+  * Style (20 points, see [here](../style.md))
   * Other
     * +2 for early submission
     * +10 for 50% scale down filter
@@ -237,7 +237,7 @@ This filter will scale an image down to half its dimensions in both `width` and 
 
 # Pre-processor for debugging
 
-The [starter file][bmpFilter.c] includes the following code in the `void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale)`
+The [starter file](bmpFilter.c) includes the following code in the `void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale)`
 
 ```
 #ifdef DEBUG
@@ -263,12 +263,3 @@ The pre-processor is being used to enable `printf` debugging. It turns **off** t
 
 Add other `printf` statements as needed for testing and debugging. As before, `gdb` is a powerful tool for debugging that is more efficient because it does not require additional code. See the [primer](../gdb-primer.md) to get started with `gdb`.
 
-# Good Programming Style
-
-Good programing style uses functions to decompose the program into several simple computations, uses self-documenting names for each function and variable, and does not repeat code. These are principles and not absolutes. Use judgement in writing code remembering that making the code simple and readable is more important than making it clever and fast.
-
-Each function should do exactly one thing in general, and it should not take more than 5-25 lines of code to do that one thing. If a function is growing outside that range, then it needs to be decomposed into two or more functions. Learning to break a program into small pieces, each of which is easy to implement, is an important skill that is only learned through discipline and practice. 
-
-Function and variable names should be self-documenting. Good programming style strives to not need comments to explain the structure or computation. The code should be simple, short, and use names that explain the intent or purpose of the function or variable. The code should tell a story of the computation that can be understood by a casual reader.
-
-Code should *not repeat* itself. The meaning of *not repeat* is that code should not be duplicated in the program where possible. If the program has the same snippet of code (5-10 lines) that appears in different locations, then those lines should be moved to a function, and the locations where they appear be reduced to a call to that new function.  

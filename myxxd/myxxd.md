@@ -64,7 +64,7 @@ The TA's build the solution and test it against a set of input files by comparin
   * Exact match with `xxd` default behavior on all input files (10 points)
   * `void readAndPrintInputAsBits(FILE* input)` (80 points)
   * Exact match with `xxd -b` on all input files (10 points)
-  * Style (20 points)
+  * Style (20 points, see [here](../style.md))
 
 # Length Guidelines
 
@@ -287,4 +287,5 @@ The command line provides a very easy solution to a non-terminating program: `CT
 
 ## I need a debugger!
 
-The debugger is `gdb` and it is available from the command line if needed. This [primer](../gdb-primer.md) is a good starting point. There are many good online resources as well.
+The debugger is `gdb` and it is available from the command line if needed. This [primer](../gdb-primer.md) is a good starting point. There are many good online resources as well.  
+
