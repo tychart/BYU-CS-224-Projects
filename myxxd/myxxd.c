@@ -217,6 +217,9 @@ int main(int argc, char **argv) {
   if (bits == FALSE) {
     readAndPrintInputAsHex(input);
   } else {
+
+    // printf(input);
+
     readAndPrintInputAsBits(input);
   }
   return 0;
