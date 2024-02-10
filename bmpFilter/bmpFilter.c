@@ -105,7 +105,7 @@ void applyThresholdToPixel(unsigned char* pixel) {
     // printf("currPixel = %p\n", pixel);
   #endif  
 
-  if(((unsigned char) pixel[0] + (unsigned char) pixel[1] + (unsigned char) pixel[2]) / 3 > 128) {
+  if(((unsigned char) pixel[0] + (unsigned char) pixel[1] + (unsigned char) pixel[2]) / 3 >= 128) {
     pixel[0] = 0xff;
     pixel[1] = 0xff;
     pixel[2] = 0xff;
