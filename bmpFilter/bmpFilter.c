@@ -97,12 +97,12 @@ void applyThresholdToPixel(unsigned char* pixel) {
     unsigned char green = pixel[1];
     unsigned char red = pixel[2];
 
-    printf("Red=%d, Green=%d, Blue=%d\n", red, green, blue);
+    // printf("Red=%d, Green=%d, Blue=%d\n", red, green, blue);
   #endif
 
   
   #ifdef DEBUG
-    printf("currPixel = %p\n", pixel);
+    // printf("currPixel = %p\n", pixel);
   #endif  
 
   if(((unsigned char) pixel[0] + (unsigned char) pixel[1] + (unsigned char) pixel[2]) / 3 > 128) {
@@ -123,7 +123,7 @@ void applyThresholdToPixel(unsigned char* pixel) {
     green = pixel[1];
     red = pixel[2];
     
-    printf("Adjusted: Red=%d, Green=%d, Blue=%d\n", red, green, blue);
+    // printf("Adjusted: Red=%d, Green=%d, Blue=%d\n", red, green, blue);
   #endif  
 
 }
@@ -144,7 +144,7 @@ void applyFilterToRow(unsigned char* row, int width, int isGrayscale) {
   // printf("TODO: void applyFilterToRow(unsigned char* row, int width, int isGrayscale)\n");
 
   #ifdef DEBUG
-    printf("currRow = %p\n", row);
+    // printf("currRow = %p\n", row);
   #endif  
 
   for(int currCol = 0; currCol < width; currCol += 3) {
@@ -155,7 +155,7 @@ void applyFilterToRow(unsigned char* row, int width, int isGrayscale) {
 void applyFilterToPixelArray(unsigned char* pixelArray, int width, int height, int isGrayscale) {
   int padding = 0;
   // printf("TODO: compute the required amount of padding from the image width/n");
-  padding = width % 4;
+  padding = (width / 3) % 4;
 
 #ifdef DEBUG
   printf("padding = %d\n", padding);
@@ -166,16 +166,18 @@ void applyFilterToPixelArray(unsigned char* pixelArray, int width, int height, i
 
   unsigned char* paddedPixelArray = pixelArray;
 
-  for(int currHeight = 0; currHeight < height * 3; currHeight++) {
-    applyFilterToRow(paddedPixelArray + (width * currHeight), width, isGrayscale);
-    paddedPixelArray += padding;
+  for(int currHeight = 0; currHeight < height; currHeight++) {
+    applyFilterToRow(paddedPixelArray + ((width + padding) * currHeight), width, isGrayscale);
+    // paddedPixelArray += padding;
   }
 
 }
 
 void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale) {
   int offsetFirstBytePixelArray = 0;
+  int widthInPixels = 0;
   int width = 0;
+  int heightInPixels = 0;
   int height = 0;
   unsigned char* pixelArray = NULL;
 
@@ -186,22 +188,25 @@ void parseHeaderAndApplyFilter(unsigned char* bmpFileAsBytes, int isGrayscale) {
   // printf("TODO: set offsetFirstBytePixelArray=%d\n", offsetFirstBytePixelArray);
 
   // Set Width
-  width = bmpFileAsBytes[18] | bmpFileAsBytes[19] << 8 | bmpFileAsBytes[20] << 16 | bmpFileAsBytes[21] << 24;
-
+  widthInPixels = bmpFileAsBytes[18] | bmpFileAsBytes[19] << 8 | bmpFileAsBytes[20] << 16 | bmpFileAsBytes[21] << 24;
+  width = widthInPixels * 3;
   // printf("TODO: se/t width=%d\n", width);
 
   // Set Height
-  height = bmpFileAsBytes[22] | bmpFileAsBytes[23] << 8 | bmpFileAsBytes[24] << 16 | bmpFileAsBytes[25] << 24;
-
+  
+  heightInPixels = bmpFileAsBytes[22] | bmpFileAsBytes[23] << 8 | bmpFileAsBytes[24] << 16 | bmpFileAsBytes[25] << 24;
+  height = heightInPixels;
   // printf("TODO: set height=%d\n", height);
 
 
   // set the pixelArray to the start of the pixel array
 
-  pixelArray = bmpFileAsBytes + offsetFirstBytePixelArray;
+  pixelArray = bmpFileAsBytes + offsetFirstBytePixelArray + 0;
 
 #ifdef DEBUG
   printf("offsetFirstBytePixelArray = %u\n", offsetFirstBytePixelArray);
+  printf("widthInPixels = %u\n", widthInPixels);
+  printf("heightInPixels = %u\n", heightInPixels); 
   printf("width = %u\n", width);
   printf("height = %u\n", height);
   printf("bmpArray = %p\n", bmpFileAsBytes);

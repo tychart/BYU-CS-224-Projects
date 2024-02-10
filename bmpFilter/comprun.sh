@@ -33,9 +33,9 @@ if [ $? -eq 0 ]; then
         # Run the compiled program
         # "./$executable"     # Default
 
-        # "./$executable" < images/orig-face.bmp   # Testing (Prints to standard out)
+        # "./$executable" < images/orig-fish.bmp   # Testing (Prints to standard out)
 
-        "./$executable" -g < images/orig-face.bmp > testing-face.bmp
+        "./$executable" < images/orig-fish.bmp > testing-face.bmp
 
 
         # echo cat images/orig-face.bmp | "./$executable"
