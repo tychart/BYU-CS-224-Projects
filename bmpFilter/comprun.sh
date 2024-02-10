@@ -35,7 +35,7 @@ if [ $? -eq 0 ]; then
 
         # "./$executable" < images/orig-face.bmp   # Testing (Prints to standard out)
 
-        "./$executable" -g < images/orig-byu.bmp > testing-face.bmp
+        "./$executable" -g < images/orig-face.bmp > testing-face.bmp
 
 
         # echo cat images/orig-face.bmp | "./$executable"
