@@ -18,8 +18,8 @@ executable="${c_file%.c}"
 
 # Compile the C program
 #gcc "$c_file" -o "$executable"      # Default
-gcc -g -Wall -DDEBUG "$c_file" -o "$executable"   # For Debugging
-# gcc -g -Wall "$c_file" -o "$executable"
+# gcc -g -Wall -DDEBUG "$c_file" -o "$executable"   # For Debugging
+gcc -g -Wall "$c_file" -o "$executable"
 
 
 # Check if compilation was successful
@@ -33,9 +33,9 @@ if [ $? -eq 0 ]; then
         # Run the compiled program
         # "./$executable"     # Default
 
-        "./$executable" < images/orig-face.bmp   # Testing (Prints to standard out)
+        # "./$executable" < images/orig-face.bmp   # Testing (Prints to standard out)
 
-        # "./$executable" < images/orig-horses.bmp > testing-face.bmp
+        "./$executable" -g < images/orig-byu.bmp > testing-face.bmp
 
 
         # echo cat images/orig-face.bmp | "./$executable"

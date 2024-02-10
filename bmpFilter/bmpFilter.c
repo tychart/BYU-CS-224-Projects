@@ -70,12 +70,20 @@ void getBmpFileAsBytes(unsigned char* ptr, unsigned fileSizeInBytes, FILE* strea
 }
 
 unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red) {
-  printf("TODO: unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)\n");
+  // printf("TODO: unsigned char getAverageIntensity(unsigned char blue, unsigned char green, unsigned char red)\n");
+
   return 0;
 }
 
 void applyGrayscaleToPixel(unsigned char* pixel) {
-  printf("TODO: void applyGrayscaleToPixel(unsigned char* pixel)\n");
+  // printf("TODO: void applyGrayscaleToPixel(unsigned char* pixel)\n");
+
+  unsigned char avg = ((unsigned char) pixel[0] + (unsigned char) pixel[1] + (unsigned char) pixel[2]) / 3;
+
+  pixel[0] = avg;
+  pixel[1] = avg;
+  pixel[2] = avg;
+
 }
 
 void applyThresholdToPixel(unsigned char* pixel) {
@@ -85,9 +93,9 @@ void applyThresholdToPixel(unsigned char* pixel) {
   
 
   #ifdef DEBUG
-    unsigned char red = pixel[0];
+    unsigned char blue = pixel[0];
     unsigned char green = pixel[1];
-    unsigned char blue = pixel[2];
+    unsigned char red = pixel[2];
 
     printf("Red=%d, Green=%d, Blue=%d\n", red, green, blue);
   #endif
@@ -111,9 +119,9 @@ void applyThresholdToPixel(unsigned char* pixel) {
 
   
   #ifdef DEBUG
-    red = pixel[0];
+    blue = pixel[0];
     green = pixel[1];
-    blue = pixel[2];
+    red = pixel[2];
     
     printf("Adjusted: Red=%d, Green=%d, Blue=%d\n", red, green, blue);
   #endif  
@@ -158,7 +166,7 @@ void applyFilterToPixelArray(unsigned char* pixelArray, int width, int height, i
 
   unsigned char* paddedPixelArray = pixelArray;
 
-  for(int currHeight = 0; currHeight < height; currHeight++) {
+  for(int currHeight = 0; currHeight < height * 3; currHeight++) {
     applyFilterToRow(paddedPixelArray + (width * currHeight), width, isGrayscale);
     paddedPixelArray += padding;
   }
