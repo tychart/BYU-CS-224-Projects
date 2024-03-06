@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -42,7 +43,30 @@ FILE *parseCommandLine(int argc, char **argv, int *bits) {
  * size: the size of the array
  **/
 void printDataAsHex(unsigned char *data, size_t size) {
-  printf("TODO 1: printDataAsHex (2)");
+  // printf("TODO 1: printDataAsHex (2)");
+  char hexCharArr[2] = {'\x00', '\x00'};
+
+  printf(" ");
+
+  for(int i = 0; i < size; i++) {
+    sprintf(hexCharArr, "%x", data[i]);
+    
+    // if(atoi(hexCharArr) < 8 && i != size - 1) {
+    if(hexCharArr[1] == '\x00') {
+      
+      printf("0");
+    }
+    // int result = (unsigned char)hexCharArr[0] | ((unsigned char)hexCharArr[1] << 8);
+    // int result2 = ((unsigned char)hexCharArr[1] << 8) | (unsigned char)hexCharArr[0];
+    printf("%s", hexCharArr);
+    // printf("(int=%d)", result2);
+    
+    if(i % 2 == 1 && i != size - 1) {
+      printf(" ");
+    }
+  }
+  
+  // printf("data:%x", output);
 }
 
 /**
@@ -54,7 +78,21 @@ void printDataAsHex(unsigned char *data, size_t size) {
  * size: the size of the array
  **/
 void printDataAsChars(unsigned char *data, size_t size) {
-  printf("TODO 2: printDataAsChars (3)");
+  // printf("TODO 2: printDataAsChars (3)");
+
+  for(int i = 0; i < size; i++) {
+    char outCharArr[2];
+    sprintf(outCharArr, "%c", data[i]);
+    if(isprint(outCharArr[0])) {
+      printf("%c", data[i]);
+    } else {
+      printf(".");
+    }
+
+    
+
+  }
+
 }
 
 void readAndPrintInputAsHex(FILE *input) {
@@ -66,6 +104,15 @@ void readAndPrintInputAsHex(FILE *input) {
     offset += numBytesRead;
     printDataAsHex(data, numBytesRead);
     printf("  ");
+    if(numBytesRead != 16) {
+      // for(int i = 0; i < 6-lineLen; i++) {
+      for(int i = 0; i < 16-numBytesRead; i++) {
+        printf("  ");
+        if(i % 2 == 1) {
+          printf(" ");
+        }
+      }
+    }
     printDataAsChars(data, numBytesRead);
     printf("\n");
     numBytesRead = fread(data, 1, 16, input);
@@ -80,7 +127,87 @@ void readAndPrintInputAsHex(FILE *input) {
  * input: input stream
  **/
 void readAndPrintInputAsBits(FILE *input) {
-  printf("TODO 3: readAndPrintInputAsBits\n");
+  // printf("TODO 3: readAndPrintInputAsBits\n");
+  
+  unsigned char data[6];
+  int numBytesRead = fread(data, 1, 6, input);
+  unsigned int offset = 0;
+  int lineLen = 0;
+
+  while (numBytesRead != 0) {
+    lineLen = 0;
+    printf("%08x:", offset);
+    printf(" ");
+
+    offset += numBytesRead;
+    printDataAsBits(data, numBytesRead);
+    printf("  ");
+    if(numBytesRead != 6) {
+      // for(int i = 0; i < 6-lineLen; i++) {
+      for(int i = 0; i < 6-numBytesRead; i++) {
+        printf("         ");
+      }
+    }
+    printDataAsChars(data, numBytesRead);
+    printf("\n");
+    numBytesRead = fread(data, 1, 6, input);
+  }
+
+}
+
+void printDataAsBits(unsigned char *data, size_t size) {
+
+  int counter = 0;
+
+  for(int i = 0; i < size / 2; i++) {
+
+    for(int j = 0; j < 2; j++) {
+      
+      printCharAsBits(data[counter]);
+      if(counter != size - 1) {
+        printf(" ");
+      }
+      counter++;
+    }
+    
+
+  }
+
+}
+
+void printCharAsBits(unsigned char inChar) {
+    // This is our char being converted
+    unsigned char c = inChar;
+    
+    // You'll also need an array to store the bit string,
+    // either chars or ints will work
+
+    int intArr[8];
+
+    for(int i = 0; i < 8; i++) {
+      
+      if(c % 2 == 1) {
+        intArr[i] = 1;
+      } else {
+        intArr[i] = 0;
+      }
+
+      c = c / 2;
+
+    }
+    
+    // Print out the resulting binary number
+    // printf("Character In Binary\n");
+
+    for(int i = 7; i >= 0; i--) {
+    
+      printf("%d", intArr[i]);
+
+    }
+
+    // printf("\n");
+    
+    return;
 }
 
 int main(int argc, char **argv) {
