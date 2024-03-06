@@ -159,6 +159,7 @@ void printDataAsBits(unsigned char *data, size_t size) {
 
   int counter = 0;
 
+
   for(int i = 0; i < size / 2; i++) {
 
     for(int j = 0; j < 2; j++) {
@@ -169,8 +170,14 @@ void printDataAsBits(unsigned char *data, size_t size) {
       }
       counter++;
     }
+
+    
     
 
+  }
+  
+  if(size % 2 == 1) {
+      printCharAsBits(data[counter]);
   }
 
 }
@@ -217,6 +224,9 @@ int main(int argc, char **argv) {
   if (bits == FALSE) {
     readAndPrintInputAsHex(input);
   } else {
+
+    // printf(input);
+
     readAndPrintInputAsBits(input);
   }
   return 0;
