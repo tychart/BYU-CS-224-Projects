@@ -1,0 +1,13 @@
+{
+    "name": "GCC: Build and debug y86-64.c",
+    "type": "cppdbg",
+    "request": "launch",
+    "program": "${workspaceFolder}/y86-64/y86-64.c",  // Adjust path if necessary
+    "args": [],
+    "gdbPath": "/usr/bin/gcc",  // Replace with the actual path to your GDB debugger
+    "cwd": "${workspaceFolder}/y86-64",
+    "environment": [],
+    "MIMode": "gdb",
+    // "miDebuggerPath": "/path/to/gdb/miDebugger",  // Optional, path to miDebugger (if separate)
+    "preLaunchTask": "build"  // Optional, task to run before launching (e.g., build task)
+  }
