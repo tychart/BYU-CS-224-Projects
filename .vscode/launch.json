@@ -10,10 +10,10 @@
             "MIMode": "gdb",
             "program": "${fileDirname}/${fileBasenameNoExtension}", 
             "args": [
-                "<",
-                "${fileDirname}/comprun.sh"
+                // "<",
+                "${fileDirname}/yo-files/test-nop.yo"
             ],
-            "preLaunchTask": "Compile the Current C File"
+            "preLaunchTask": "Custom Compile the Current C Project"
 
         }
     ]    

@@ -3,10 +3,57 @@
 
 #include "utils.h"
 
+
 const int MAX_MEM_SIZE  = (1 << 13);
 
 void fetchStage(int *icode, int *ifun, int *rA, int *rB, wordType *valC, wordType *valP) {
- 
+
+  switch(*icode) {
+    case 0x0:
+      valP = (wordType*) getPC() + 1;
+      break;
+
+    case 0x1:
+      valP = (wordType*) getPC() + 1;
+      break;
+
+    case 0x2:
+      
+      break;
+
+    case 0x3:
+    
+      break;
+
+    case 0x4:
+    
+      break;
+
+    case 0x5:
+    
+      break;
+
+    case 0x6:
+    
+      break;
+
+    case 0x7:
+    
+      break;
+    case 0x8:
+    
+      break;
+
+    case 0x9:
+    
+      break;
+
+    case 0xa:
+    
+      break;
+            
+  }
+
 }
 
 void decodeStage(int icode, int rA, int rB, wordType *valA, wordType *valB) {
@@ -27,6 +74,52 @@ void writebackStage(int icode, int rA, int rB, wordType valE, wordType valM) {
 
 void pcUpdateStage(int icode, wordType valC, wordType valP, bool Cnd, wordType valM) {
   
+  switch(icode) {
+    case 0x0:
+      setPC(valP);
+      setStatus(STAT_HLT);
+      break;
+
+    case 0x1:
+      setPC(valP);
+      break;
+
+    case 0x2:
+    
+      break;
+
+    case 0x3:
+    
+      break;
+
+    case 0x4:
+    
+      break;
+
+    case 0x5:
+    
+      break;
+
+    case 0x6:
+    
+      break;
+
+    case 0x7:
+    
+      break;
+    case 0x8:
+    
+      break;
+
+    case 0x9:
+    
+      break;
+      
+    case 0xa:
+    
+      break;
+  }
+
 }
 
 void stepMachine(int stepMode) {
@@ -74,6 +167,11 @@ void stepMachine(int stepMode) {
 int main(int argc, char **argv) {
   int stepMode = 0;
   FILE *input = parseCommandLine(argc, argv, &stepMode);
+
+  #ifdef DEBUG
+    printf("Starting Program\n");
+  #endif
+  printf("Starting Program\n");
 
   initializeMemory(MAX_MEM_SIZE);
   initializeRegisters();
