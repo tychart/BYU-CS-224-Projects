@@ -3,15 +3,20 @@
         {
             
             "name": "Compile and Run With Custom Args",
-            "type": "compound",
+            "type": "cppdbg",
             "request": "launch",
-            // "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "preLaunchTask": "Compile the Current C file",
+            "cwd": "${workspaceFolder}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}", 
+            "args": [
+                "arg1",
+                "arg2"
+            ]
 
-            "postDebugTask": "Run Executable With Custom Args"
 
         }
 
     ],
     "version": "2.0.0"
 }
+
+// 
