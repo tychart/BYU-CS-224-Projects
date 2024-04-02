@@ -1,0 +1,16 @@
+                               | # Write a code snippet that adds up all
+                               | # numbers from 1 to n (n is stored in %rdi)
+                               | # Feel free to change the value of n
+0x0000: 30f70a00000000000000   | irmovq $10, %rdi
+0x000a: 30f10000000000000000   | irmovq $0, %rcx
+0x0014: 30f80100000000000000   | irmovq $1, %r8
+                               | 
+0x001e:                        | looptwostart:
+                               | 
+                               |     #irmovq $0, %r9
+0x001e: 6071                   |     addq %rdi, %rcx
+                               |     
+0x0020: 6187                   |     subq %r8, %rdi
+0x0022: 741e00000000000000     |     jne looptwostart
+                               | 
+0x002b: 00                     | halt

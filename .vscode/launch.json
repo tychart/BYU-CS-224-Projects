@@ -1,17 +1,22 @@
 {
+    "version": "2.0.0",
     "configurations": [
         {
             
             "name": "Compile and Run With Custom Args",
-            "type": "compound",
+            "type": "cppdbg",
             "request": "launch",
-            // "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "preLaunchTask": "Compile the Current C file",
-
-            "postDebugTask": "Run Executable With Custom Args"
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "program": "${fileDirname}/${fileBasenameNoExtension}", 
+            "args": [
+                // "<",
+                "${fileDirname}/yo-files/test-nop.yo"
+            ],
+            "preLaunchTask": "Custom Compile the Current C Project"
 
         }
-
-    ],
-    "version": "2.0.0"
+    ]    
 }
+
+// 
